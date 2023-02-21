@@ -1,5 +1,5 @@
 # ORM Watching Storage
-ORM Watching Storage, is a simple bank security control service written on `Django` framework.
+ORM Watching Storage, is an internal bank security control service written on `Django` framework.
 Service allows you to monitor the following: 
 - all active pass-card
 - List of vault visits on a unique pass-card and whether they were suspicious or not
@@ -17,25 +17,17 @@ To install them use `pip` (or `pip3`, if there is a conflict with Python2) to in
 ```
 pip install -r requirements.txt
 ```
-Once all dependencies installed, to get a test pass-card dataset `settings.py` file needs to be changed.
-Use following settings
+Once all dependencies installed, next step is create **.env** file which should contain all sensitive-secured information.
 ```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'checkpoint.devman.org',
-        'PORT': '5434',
-        'NAME': 'checkpoint',
-        'USER': 'guard',
-        'PASSWORD': 'osim5',
-    }
-}
+DATABASE_HOST=Address to database
+DATABASE_PASSWORD=Your password
+SECRET_KEY=Your secret key
 ```
 
 ## Usage
-### main.py
+### manage.py
 Main file, run it to start a local server.
-`python3 main.py `
+`python3 manage.py runserver 0.0.0.0:8000 `
 
 Example of success execute.
 
@@ -63,6 +55,7 @@ class Passcard(models.Model):
 ```
 #### active_passcards_view.py
 Showing number of active pass-card from ``Passcards``. Using `active_passcards.html` template.
+
 ![Screenshot 2023-02-14 at 14 31 57](https://user-images.githubusercontent.com/123511478/218734564-fbdf5dfa-7881-466a-ac57-9b0a5afe40fa.png)
 
 #### passcard_info_view.py
