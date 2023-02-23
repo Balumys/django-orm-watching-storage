@@ -8,22 +8,22 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': env("DATABASE_HOST"),
-        'PORT': '5434',
-        'NAME': 'checkpoint',
-        'USER': 'guard',
+        'PORT': env("DATABASE_PORT"),
+        'NAME': env("DATABASE_NAME"),
+        'USER': env("DATABASE_USER"),
         'PASSWORD': env('DATABASE_PASSWORD'),
     }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env.str('SECRET_KEY', default="Secret")
 
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
 ROOT_URLCONF = 'project.urls'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default="localhost")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES = [
